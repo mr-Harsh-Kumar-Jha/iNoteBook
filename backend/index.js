@@ -18,6 +18,7 @@ app.use(express.json());    // middleware consists of three things request, resp
 
 // creating end points
 app.use('/api/auth', require('./routers/auth'));
+app.use('/api/notes',require('./routers/notes'));
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);

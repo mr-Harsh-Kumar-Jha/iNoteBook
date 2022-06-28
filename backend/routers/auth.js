@@ -48,23 +48,23 @@ router.post('/createuser',[
 //NOTE:-  if we are using post then there is no chance of getting out details featched from log files while doing http request where as their is high chance of getting our data leaked through log files when throwing get request..
 
 //Rout 2: this is a login endpoint
-router.get('/login' , [
+router.post('/login' , [
    body('email', "Enter a valid Email Id").isEmail(),
    body('password', "Password cannot be Blank").exists(),
-],async(req ,res)=>{
+],async (req ,res)=>{
         const errors = validationResult(req);
         if(!errors.isEmpty()){
          return res.status(400).json({error : errors.array()});
         }
         const {email , password} = req.body;
-        console.log(email , password);
+
         try{
-         let User = await user.findOne({email: req.body.email});
+         let User = await user.findOne({email: email});
          if(!User){
             return res.status(400).json({error: "please try to login with correct credentials"});
          }
          const passwordcompare =await bcrypt.compare(password , User.password);
-         if(!passwordcompare && !password){
+         if(!passwordcompare || !password ){
             return res.status(400).json({error: "please try to login with correct credentials"});
          }
          const data = {
@@ -85,9 +85,6 @@ router.get('/getuser' ,fetchuser, async(req ,res)=>{
         try{
            const userId =req.User.id;  //here user is the object user created in fetchuser.js
            const users = await user.findById(userId).select("-password"); //here this user is the user from module section and findById is searching for user using id and user is just returning a object with the information of user in organised and data mentioned formed.
-           const bro = {
-            bhai:"brave",
-           }
             res.send(users);
         }catch(errors){
              console.log(errors.message);
