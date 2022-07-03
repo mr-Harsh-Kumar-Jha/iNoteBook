@@ -1,7 +1,7 @@
 
 const mongoose = require('mongoose');
 const uri = "mongodb://127.0.0.1:27017/test";
-// 127.0.0.1
+//it is the replacement for " localhost " -- 127.0.0.1
 const connectToMongo= ()=>{
    mongoose.connect(uri,()=>{
       console.log("MongoDB connected Successfully");
