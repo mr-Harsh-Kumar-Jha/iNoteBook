@@ -1,17 +1,12 @@
 const connectToMongo = require('./db');
 const express = require('express');
-const cors = require('cors');
-// var bodyParser = require('body-parser');
+const cors = require('cors'); // this is used to manage cross origin  flaw which restricts http request form browser.
 
-// create application/json parser
-// var jsonParser = bodyParser.json()
-
-// // create application/x-www-form-urlencoded parser
-// var urlencodedParser = bodyParser.urlencoded({ extended: false });
 connectToMongo();
 
 
-const app = express()
+const app = express()  // it returns various useful functions which is used to manage backend process
+
 const port = 4000;
 app.use(cors());
 // in order to access the body of request we have to bring middleware in between i.e we have to use app.use(express.json());  this is defining that use the json file for input method as a req body.

@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const { stringify } = require('postman-request/lib/url-parse');
 const { Schema } = mongoose;
 
 const notesSchema = new Schema({
