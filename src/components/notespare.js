@@ -70,6 +70,7 @@ function Notespare() {
          {/* Code for displaying notes */}
          <div className='container my-3'>
             <h2>Your Notes :</h2>
+            <div className='container'  style={{fontSize:'x-large'}}>{note.length===0 && "No Notes Available"}</div>
             <div className='row ' style={{ height: "330px", overflow: "scroll" }}>
                {note.map((notes) => {
                   return <NotesItem key={notes._id} editnote={editnote} notes={notes} />

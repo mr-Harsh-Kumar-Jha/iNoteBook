@@ -44,7 +44,7 @@ const NoteState = (props) => {
       // }
       //  notes.push(not);
       if (!json.error) {
-         setnote(note.concat(json)); //concat returns an array ehereas push updates an array
+         setnote(note.concat(json)); //concat returns an array whereas push updates an array
       }
    }
    const Deletenote = async (id) => {

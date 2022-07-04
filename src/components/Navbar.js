@@ -1,12 +1,14 @@
 import { React } from 'react'
 import { Link, useLocation } from 'react-router-dom'
+import Login from './Login';
+import SignUp from './SignUp';
 
 const Navbar = () => {
    const location = useLocation();
    return (
       <nav className="navbar navbar-expand-lg bg-light">
          <div className="container-fluid">
-            <Link className="navbar-brand" to="/">Navbar</Link>
+            <Link className="navbar-brand" to="/">iNoteBook</Link>
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                <span className="navbar-toggler-icon"></span>
             </button>
@@ -20,8 +22,8 @@ const Navbar = () => {
                   </li>
                </ul>
                <form className="d-flex" role="search">
-                  <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                  <button className="btn btn-outline-success" type="submit">Search</button>
+                  <Login />
+                  <SignUp />
                </form>
             </div>
          </div>
