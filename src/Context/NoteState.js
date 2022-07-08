@@ -8,16 +8,17 @@ const NoteState = (props) => {
    const [note, setnote] = useState(notes);
 
    const getnotes = async () => {
-      const response = await fetch(`${host}/api/notes/getnotes`, {
-         method: 'GET',
-         headers: {
-            "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjJiYjQ4NTU5YmEyNDVhYzJmOTEzNzg0In0sImlhdCI6MTY1NjU2NDc2NH0.1SuMCPxvrf84ncFF3Qs6vjEzozZwoMnDgQMAfTBUCD4"
-         },
-         // body: JSON.stringify()
-      });
-      // eslint-disable-next-line
-      const json = await response.json();
-      setnote(json);
+         const response = await fetch(`${host}/api/notes/getnotes`, {
+            method: 'GET',
+            headers: {
+               "auth-token": localStorage.getItem('token')
+            },
+            // body: JSON.stringify()
+         });
+         // eslint-disable-next-line
+         const json = await response.json();
+         setnote(json);
+
    }
 
    const Addnote = async (Title, Description, Tag) => {
@@ -27,7 +28,7 @@ const NoteState = (props) => {
          method: 'POST',
          headers: {
             'Content-Type': ' application/json ',
-            "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjJiYjQ4NTU5YmEyNDVhYzJmOTEzNzg0In0sImlhdCI6MTY1NjU2NDc2NH0.1SuMCPxvrf84ncFF3Qs6vjEzozZwoMnDgQMAfTBUCD4"
+            "auth-token": localStorage.getItem('token')
          },
          body: JSON.stringify({ Title, Description, Tag })
       });
@@ -54,7 +55,7 @@ const NoteState = (props) => {
       const response = await fetch(`${host}/api/notes/deletenotes/${id}`, {
          method: 'DELETE',
          headers: {
-            "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjJiYjQ4NTU5YmEyNDVhYzJmOTEzNzg0In0sImlhdCI6MTY1NjU2NDc2NH0.1SuMCPxvrf84ncFF3Qs6vjEzozZwoMnDgQMAfTBUCD4"
+            "auth-token": localStorage.getItem('token')
          },
          // body: JSON.stringify({ Title, Description, Tag })
       });
@@ -71,7 +72,7 @@ const NoteState = (props) => {
          method: 'PUT',
          headers: {
             'Content-Type': ' application/json ',
-            "auth-token": " eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjJiYjQ4NTU5YmEyNDVhYzJmOTEzNzg0In0sImlhdCI6MTY1NjU2NDc2NH0.1SuMCPxvrf84ncFF3Qs6vjEzozZwoMnDgQMAfTBUCD4"
+            "auth-token": localStorage.getItem('token')
          },
          body: JSON.stringify({ Title, Description, Tag })
       });

@@ -5,6 +5,10 @@ import SignUp from './SignUp';
 
 const Navbar = () => {
    const location = useLocation();
+   const logout = () =>{
+      localStorage.removeItem('token');
+      window.location.reload();
+   }
    return (
       <nav className="navbar navbar-expand-lg bg-light">
          <div className="container-fluid">
@@ -21,10 +25,11 @@ const Navbar = () => {
                      <Link className={`nav-link  ${location.pathname === "/about" ? 'active' : ' '} `} to="/about">About</Link>
                   </li>
                </ul>
-               <form className="d-flex" role="search">
+              {!localStorage.getItem('token')? <div className="d-flex" role="search">
+                  {/* <Login /> */}
                   <Login />
                   <SignUp />
-               </form>
+               </div> : <button type='button' className='btn btn-primary mx-1' onClick={logout}>LogOut</button>}
             </div>
          </div>
       </nav>

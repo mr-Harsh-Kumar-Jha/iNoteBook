@@ -4,7 +4,7 @@ const JWT_SECRET = "harshis@sigmamail";
 const fetchuser = (req, res, next) => {
    // get the user from JWT token and add user to req object
    const token = req.header('auth-token');
-   if (!token) {
+   if (!token ) {
       res.status(404).send({ error: "Please authenticate using correct token" });
    }
    try {

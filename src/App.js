@@ -8,23 +8,25 @@ import NoteState from './Context/NoteState';
 import {
    BrowserRouter as Router,
    Route,
-   Routes
- } from "react-router-dom";
-
+   Routes,
+} from "react-router-dom";
+// import Login from './components/Login';
+// import SignUp from './components/SignUp';
 
 function App() {
+
    return (
       <>
-      <NoteState>
-         <Router>
-         <Navbar/>
-            <div className='container ' >
-               <Routes>
-               <Route exact path="/" element={<Home />} />
-               <Route exact path="/about" element={<About />} />
-               </Routes>
-            </div>
-         </Router>
+         <NoteState>
+            <Router>
+               <Navbar />
+               <div className='container ' >
+                  <Routes>
+                     <Route exact path="/" element={<Home />} />
+                     <Route exact path="/about" element={<About />} />
+                  </Routes>
+               </div>
+            </Router>
          </NoteState>
       </>
    );

@@ -1,57 +1,64 @@
-import React ,{useState,useRef} from 'react'
-import { Link, useLocation } from 'react-router-dom'
-
+import React, { useState, useRef } from 'react'
+// import { Link } from 'react-router-dom';
 
 const Login = () => {
-   const location = useLocation();
    const close = useRef(null);
-   const [credentials, setcreden] = useState({emails:'' , passwords:''});
+
+   const [credentials, setcreden] = useState({ email: '', password: '' });
    const onChanges = (e) => {
       setcreden({ ...credentials, [e.target.id]: e.target.value });
    }
-   const handleclick =async (e)=>{
+   const handleclick = async (e) => {
       e.preventDefault();
       const response = await fetch("http://localhost:4000/api/auth/login", {
          method: 'POST',
          headers: {
             'Content-Type': 'application/json',
          },
-         body: JSON.stringify({ email:credentials.emails , password:credentials.passwords })
+         body: JSON.stringify({ email: credentials.email, password: credentials.password })
       });
       const json = await response.json();
       console.log(json);
-      close.current.click();
+      if (json.success) {
+         localStorage.setItem('token', json.authtoken);
+         close.current.click();
+         window.location.reload();
+      }
+      else {
+         alert("please login with correct credentials");
+      }
+
    }
 
    return (
       <div>
          {/* <!-- Button trigger modal --> */}
-         <Link type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" className={`btn btn-primary mx-1 ${location.pathname === "/login" ? 'active' : ' '}`} to="/login" >Login</Link>
+         <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" className="btn btn-primary mx-1 "  >Login</button>
 
          {/* <!-- Modal --> */}
-         <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModaLabel" aria-hidden="true">
             <div className="modal-dialog">
                <div className="modal-content">
                   <div className="modal-header">
-                     <h5 className="modal-title" id="exampleModalLabel">Modal title</h5>
+                     <h5 className="modal-title" id="exampleModaLabel">Login to Continue to iNoteBook</h5>
                      <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div className="modal-body">
-                     <form >
+                     <form onSubmit={handleclick}>
                         <div className="mb-3">
-                           <label htmlFor="emails" className="form-label">Email address</label>
-                           <input type="emails" className="form-control" id="emails" aria-describedby="emailHelp" onChange={onChanges} value={credentials.emails}/>
+                           <label htmlFor="email" className="form-label">Email address</label>
+                           <input type="email" className="form-control" id="email" aria-describedby="emailHelp" onChange={onChanges} value={credentials.email} />
                            <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
                         </div>
                         <div className="mb-3">
-                           <label htmlFor="passwords" className="form-label">Password</label>
-                           <input type="passwords" className="form-control" id="passwords" onChange={onChanges} value={credentials.passwords}/>
+                           <label htmlFor="password" className="form-label">Password</label>
+                           <input type="password" className="form-control" id="password" onChange={onChanges} value={credentials.password} />
                         </div>
                         <div className="mb-3 form-check">
                            <input type="checkbox" className="form-check-input" id="exampleCheck2" />
                            <label className="form-check-label" htmlFor="exampleCheck2">Check me out</label>
                         </div>
-                        <button type="button" className="btn btn-primary" onClick={handleclick}>Submit</button>
+                        <button type="submit" className="btn btn-primary" >Submit</button>
                      </form>
                   </div>
                   <div className="modal-footer">

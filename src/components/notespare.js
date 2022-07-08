@@ -9,10 +9,14 @@ function Notespare() {
    const [notes, setnote] = useState({ id: '', etitle: '', edescription: '', etag: '' })
    // eslint-disable-next-line
    const { note, getnotes, Editnote } = context;
+
    useEffect(() => {
-      getnotes();
+      if (localStorage.getItem('token')) {
+         getnotes();
+      }
       // eslint-disable-next-line
    }, [])
+
    const closeref = useRef(null);
    const ref = useRef(null);
    const editnote = (currentnote) => {
@@ -32,12 +36,12 @@ function Notespare() {
    return (
       <>
          {/*  Button trigger modal  */}
-         <button ref={ref} type="button" className="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#exampleModal">
+         <button ref={ref} type="button" className="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#exampleModale">
             Launch demo modal
          </button>
 
          {/*  Modal  */}
-         <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+         <div className="modal fade" id="exampleModale" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div className="modal-dialog">
                <div className="modal-content">
                   <div className="modal-header">
@@ -70,7 +74,7 @@ function Notespare() {
          {/* Code for displaying notes */}
          <div className='container my-3'>
             <h2>Your Notes :</h2>
-            <div className='container'  style={{fontSize:'x-large'}}>{note.length===0 && "No Notes Available"}</div>
+            <div className='container' style={{ fontSize: 'x-large' }}>{note.length === 0 && "No Notes Available"}</div>
             <div className='row ' style={{ height: "330px", overflow: "scroll" }}>
                {note.map((notes) => {
                   return <NotesItem key={notes._id} editnote={editnote} notes={notes} />
