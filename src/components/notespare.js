@@ -55,7 +55,7 @@ function Notespare() {
                            <input type="etitle" className="form-control" id="etitle" aria-describedby="etitle" onChange={onChanges} value={notes.etitle} />
                         </div>
                         <div className="mb-3">
-                           <label htmlFor="edescription" className="form-label">description</label>
+                           <label htmlFor="edescription" className="form-label">Description</label>
                            <input type="edescription" className="form-control" id="edescription" onChange={onChanges} value={notes.edescription} />
                         </div>
                         <div className="mb-3">
